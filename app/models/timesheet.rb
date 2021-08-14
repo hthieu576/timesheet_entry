@@ -16,8 +16,4 @@ class Timesheet < ApplicationRecord
   belongs_to :user
 
   validates :date, :start_time, :finish_time, presence: true
-
-  def earning_by_day
-    
-  end
 end
