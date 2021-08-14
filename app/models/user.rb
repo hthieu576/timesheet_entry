@@ -20,6 +20,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :first_name, :last_name, :email, presence: true
+  validates_uniqueness_of :email
+
   def full_name
     "#{first_name} #{last_name}"
   end
