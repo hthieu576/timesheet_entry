@@ -11,7 +11,13 @@
 #  updated_at  :datetime         not null
 #
 class Timesheet < ApplicationRecord
+  include WorkingTimes::Calculation
+
   belongs_to :user
 
   validates :date, :start_time, :finish_time, presence: true
+
+  def earning_by_day
+    
+  end
 end
