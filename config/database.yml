@@ -1,0 +1,17 @@
+shared: &shared
+  adapter: mysql2
+  reconnect: true
+  encoding: utf8
+  pool: 5
+  socket: /tmp/mysql.sock
+  username: root
+  password:
+
+development:
+  database: timesheet_entry
+  <<: *shared
+
+test: &TEST
+  database: timesheet_entry_test
+  <<: *shared
+

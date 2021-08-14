@@ -1,0 +1,19 @@
+= form_for @timesheet do |f|
+  - if @timesheet.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@timesheet.errors.count, "error")} prohibited this timesheet from being saved:"
+      %ul
+        - @timesheet.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :date
+    = f.date_select :date
+  .field
+    = f.label :start_time
+    = f.time_select :start_time
+  .field
+    = f.label :finish_time
+    = f.time_select :finish_time
+  .actions
+    = f.submit 'Save'

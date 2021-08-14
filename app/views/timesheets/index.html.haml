@@ -1,0 +1,25 @@
+%h1 Listing timesheets
+
+%table
+  %thead
+    %tr
+      %th Date
+      %th Start time
+      %th Finish time
+      %th
+      %th
+      %th
+
+  %tbody
+    - @timesheets.each do |timesheet|
+      %tr
+        %td= timesheet.date
+        %td= timesheet.start_time
+        %td= timesheet.finish_time
+        %td= link_to 'Show', timesheet
+        %td= link_to 'Edit', edit_timesheet_path(timesheet)
+        %td= link_to 'Destroy', timesheet, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Timesheet', new_timesheet_path
