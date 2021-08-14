@@ -15,6 +15,8 @@ module WorkingTimes
     }
 
     def earning_daily(date, start_time, finish_time)
+      start_time = Time.parse(start_time)
+      finish_time = Time.parse(finish_time)
       schedule_working = WORKING_HOURS_SCHEDULE[date.wday]
       range_time_working = Time.parse(schedule_working[:start_time])..Time.parse(schedule_working[:finish_time])
       if range_time_working.include?(start_time..finish_time)
@@ -26,12 +28,12 @@ module WorkingTimes
         hours_inside_rate * schedule_working[:rate] + hours_outside_rate * schedule_working[:outside_rate]
       elsif finish_time < Time.parse(schedule_working[:start_time]) || start_time > Time.parse(schedule_working[:finish_time])
         ((finish_time - start_time) / 1.hours) * schedule_working[:outside_rate]
-      elsif schedule_working.exclude?(start_time) && schedule_working.include?(finish_time)
+      elsif range_time_working.exclude?(start_time) && range_time_working.include?(finish_time)
         total_hours = (finish_time - start_time) / 1.hours
         hours_inside_rate = (finish_time - Time.parse(schedule_working[:start_time])) / 1.hours
         hours_outside_rate = total_hours - hours_inside_rate
         hours_inside_rate * schedule_working[:rate] + hours_outside_rate * schedule_working[:outside_rate]
-      elsif schedule_working.include?(start_time) && schedule_working.exclude?(finish_time)
+      elsif range_time_working.include?(start_time) && range_time_working.exclude?(finish_time)
         total_hours = (finish_time - start_time) / 1.hours
         hours_inside_rate = (Time.parse(schedule_working[:finish_time]) - start_time) / 1.hours
         hours_outside_rate = total_hours - hours_inside_rate
