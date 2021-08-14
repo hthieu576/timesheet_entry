@@ -1,40 +1,29 @@
 class TimesheetsController < ApplicationController
-  before_action :set_timesheet, only: %i[ show edit update destroy ]
+  before_action :set_timesheet, only: %i[show edit update destroy]
 
-  # GET /timesheets or /timesheets.json
   def index
-    @timesheets = Timesheet.all
+    @timesheets = current_user.timesheets
   end
 
-  # GET /timesheets/1 or /timesheets/1.json
-  def show
-  end
+  def show; end
 
-  # GET /timesheets/new
   def new
     @timesheet = Timesheet.new
   end
 
-  # GET /timesheets/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /timesheets or /timesheets.json
   def create
-    @timesheet = Timesheet.new(timesheet_params)
-
+    @timesheet = current_user.timesheets.build(timesheet_params)
     respond_to do |format|
       if @timesheet.save
-        format.html { redirect_to @timesheet, notice: "Timesheet was successfully created." }
-        format.json { render :show, status: :created, location: @timesheet }
+        format.html { redirect_to @timesheet, notice: "Transaction was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @timesheet.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /timesheets/1 or /timesheets/1.json
   def update
     respond_to do |format|
       if @timesheet.update(timesheet_params)
@@ -47,7 +36,6 @@ class TimesheetsController < ApplicationController
     end
   end
 
-  # DELETE /timesheets/1 or /timesheets/1.json
   def destroy
     @timesheet.destroy
     respond_to do |format|
@@ -57,13 +45,12 @@ class TimesheetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_timesheet
-      @timesheet = Timesheet.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def timesheet_params
-      params.require(:timesheet).permit(:date, :start_time, :finish_time)
-    end
+  def set_timesheet
+    @timesheet = Timesheet.find(params[:id])
+  end
+
+  def timesheet_params
+    params.require(:timesheet).permit(:date, :start_time, :finish_time)
+  end
 end
