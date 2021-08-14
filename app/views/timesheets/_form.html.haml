@@ -15,5 +15,7 @@
   .field
     = f.label :finish_time
     = f.time_select :finish_time
-  .actions
-    = f.submit 'Save'
+  .actions.mt-4
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Show', @timesheet, class: 'btn btn-info'
+    = link_to 'Back', timesheets_path, class: 'btn btn-dark'

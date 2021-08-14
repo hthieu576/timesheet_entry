@@ -1,15 +1,19 @@
+%h2 Timesheet Detail
 %p#notice= notice
 
-%p
-  %b Date:
-  = @timesheet.date
-%p
-  %b Start time:
-  = @timesheet.start_time
-%p
-  %b Finish time:
-  = @timesheet.finish_time
-
-= link_to 'Edit', edit_timesheet_path(@timesheet)
-\|
-= link_to 'Back', timesheets_path
+%table.table.borderless
+  %tbody
+    %tr
+      %th Date
+      %td
+        = @timesheet.date
+    %tr
+      %th Start Time
+      %td
+        = @timesheet.start_time
+    %tr
+      %th Finish Time
+      %td
+        = @timesheet.finish_time
+= link_to 'Edit', edit_timesheet_path(@timesheet), class: 'btn btn-success'
+= link_to 'Back', timesheets_path, class: 'btn btn-dark'

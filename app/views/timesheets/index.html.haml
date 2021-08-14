@@ -1,14 +1,12 @@
+%p#notice= notice
 %h1 Listing timesheets
-
-%table
-  %thead
+%table.table.table-striped
+  %thead.thead-dark
     %tr
       %th Date
       %th Start time
       %th Finish time
-      %th
-      %th
-      %th
+      %th.text-center Actions
 
   %tbody
     - @timesheets.each do |timesheet|
@@ -16,10 +14,11 @@
         %td= timesheet.date
         %td= timesheet.start_time
         %td= timesheet.finish_time
-        %td= link_to 'Show', timesheet
-        %td= link_to 'Edit', edit_timesheet_path(timesheet)
-        %td= link_to 'Destroy', timesheet, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.text-center
+          = link_to 'Show', timesheet, class: 'btn btn-info btn-sm'
+          = link_to 'Edit', edit_timesheet_path(timesheet), class: 'btn btn-success btn-sm'
+          = link_to 'Destroy', timesheet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
 
 %br
 
-= link_to 'New Timesheet', new_timesheet_path
+= link_to 'New Timesheet', new_timesheet_path, class: 'btn btn-warning text-white'
