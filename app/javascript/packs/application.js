@@ -11,3 +11,6 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$('.datepicker').datepicker({format: 'dd/mm/yyyy', endDate: '+0d'});
+$('.datetimepicker3').datetimepicker({format: 'LT'});

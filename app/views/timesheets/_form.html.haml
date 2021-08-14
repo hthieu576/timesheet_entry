@@ -6,16 +6,18 @@
         - @timesheet.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :date
-    = f.date_select :date
-  .field
-    = f.label :start_time
-    = f.time_select :start_time
-  .field
-    = f.label :finish_time
-    = f.time_select :finish_time
+  .row.mb-3
+    .col-4
+      = f.label :date
+      = f.date_field :date, class: 'datepicker form-control'
+  .row.mb-3
+    .col-4
+      = f.label :start_time
+      = f.time_select :start_time, { class: 'datetimepicker3' }
+  .row.mb-3
+    .col-4
+      = f.label :finish_time
+      = f.time_select :finish_time
   .actions.mt-4
     = f.submit class: 'btn btn-primary'
-    = link_to 'Show', @timesheet, class: 'btn btn-info'
     = link_to 'Back', timesheets_path, class: 'btn btn-dark'
