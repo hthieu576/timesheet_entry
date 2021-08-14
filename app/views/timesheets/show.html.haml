@@ -10,10 +10,14 @@
     %tr
       %th Start Time
       %td
-        = @timesheet.start_time
+        = l(@timesheet.start_time, format:  '%H:%M')
     %tr
       %th Finish Time
       %td
-        = @timesheet.finish_time
+        = l(@timesheet.finish_time, format:  '%H:%M')
+    %tr
+      %th Amount
+      %td
+        = @timesheet.decorate.amount
 = link_to 'Edit', edit_timesheet_path(@timesheet), class: 'btn btn-success'
 = link_to 'Back', timesheets_path, class: 'btn btn-dark'

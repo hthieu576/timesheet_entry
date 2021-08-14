@@ -35,6 +35,7 @@ gem 'bootstrap', '4.1.1'
 gem 'material-sass', '4.1.1'
 gem "haml-rails", "~> 2.0"
 gem 'bootstrap-datepicker-rails'
+gem 'draper'
 
 #
 # Serializer
