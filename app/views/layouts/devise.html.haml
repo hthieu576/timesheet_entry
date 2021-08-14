@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title ChallengeProject
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload'
+  %body
+    .container
+      .row
+        %main.col-md-12.ml-sm-auto.col-lg-12.pt-3.px-4.text-center{:role => "main"}
+          %img{:alt => "", width: '550', height: '250', :src => "https://images.ctfassets.net/8y4on51kf6pi/weploy-video-ph/69c26fe53add3ad982d0a7c6e9bdc4fe/image.adapt.1000.high.png"}/
+          = yield
