@@ -5,13 +5,17 @@ class TimesheetsController < ApplicationController
     @timesheets = current_user.timesheets
   end
 
-  def show; end
+  def show
+    authorize @timesheet
+  end
 
   def new
     @timesheet = Timesheet.new
   end
 
-  def edit; end
+  def edit
+    authorize @timesheet
+  end
 
   def create
     @timesheet = current_user.timesheets.build(timesheet_params)
@@ -25,22 +29,21 @@ class TimesheetsController < ApplicationController
   end
 
   def update
+    authorize @timesheet
     respond_to do |format|
       if @timesheet.update(timesheet_params)
         format.html { redirect_to @timesheet, notice: "Timesheet was successfully updated." }
-        format.json { render :show, status: :ok, location: @timesheet }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @timesheet.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
+    authorize @timesheet
     @timesheet.destroy
     respond_to do |format|
       format.html { redirect_to timesheets_url, notice: "Timesheet was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
