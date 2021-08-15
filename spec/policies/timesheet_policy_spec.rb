@@ -1,27 +1,19 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe TimesheetPolicy, type: :policy do
-  let(:user) { User.new }
-
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:owner) { create(:user) }
+  let(:timesheet_owner) { create(:timesheet, user: owner) }
+  let(:timesheet_not_owner) { create(:timesheet) }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :update?, :edit?, :destroy?, :show? do
+    it "denies access if timesheet not belong to owner" do
+      expect(subject).not_to permit(owner, timesheet_not_owner)
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "grants access if timesheet belong to owner" do
+      expect(subject).to permit(owner, timesheet_owner)
+    end
   end
 end
