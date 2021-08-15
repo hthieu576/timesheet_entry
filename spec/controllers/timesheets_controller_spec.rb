@@ -58,7 +58,7 @@ RSpec.describe TimesheetsController, type: :controller do
     context 'when case success' do
       let(:date) { Date.today + 1.days }
 
-      it 'works!' do
+      it 'should create a record!' do
         expect { subject }.to change(Timesheet, :count).from(0).to(1)
         expect(response.status).to eq 302
       end
@@ -150,7 +150,7 @@ RSpec.describe TimesheetsController, type: :controller do
         }
       end
 
-      it 'works!' do
+      it 'should update date of record!' do
         expect { subject }.to change { timesheet.reload.date }.from(Date.today).to(Date.today + 2.days)
       end
     end
@@ -200,7 +200,7 @@ RSpec.describe TimesheetsController, type: :controller do
 
     let(:timesheet) { create(:timesheet, user: user) }
 
-    it 'works!' do
+    it 'should delete a record!' do
       expect { subject }.to change(Timesheet, :count).by(0)
     end
   end
