@@ -35,8 +35,8 @@ RSpec.describe TimesheetsController, type: :controller do
       {
         timesheet: {
           date: date,
-          start_time: Time.parse('10:00'),
-          finish_time: Time.parse('22:00')
+          start_time: '10:00',
+          finish_time: '22:00'
         }
       }
     end
@@ -47,16 +47,35 @@ RSpec.describe TimesheetsController, type: :controller do
     end
 
     context 'when case failed' do
-      let(:date) { nil }
+      context 'when case date nil' do
+        let(:date) { nil }
 
-      it 'unprocessable!' do
-        subject
-        expect(response.status).to eq 422
+        it 'unprocessable!' do
+          subject
+          expect(response.status).to eq 422
+        end
+      end
+
+      context 'when case start_time greater than finish_time' do
+        let(:params) do
+          {
+            timesheet: {
+              date: Date.today - 1.days,
+              start_time: '13:00',
+              finish_time: '10:00'
+            }
+          }
+        end
+
+        it 'unprocessable!' do
+          subject
+          expect(response.status).to eq 422
+        end
       end
     end
 
     context 'when case success' do
-      let(:date) { Date.today + 1.days }
+      let(:date) { Date.today - 1.days }
 
       it 'should create a record!' do
         expect { subject }.to change(Timesheet, :count).from(0).to(1)
@@ -145,13 +164,13 @@ RSpec.describe TimesheetsController, type: :controller do
       let(:params) do
         { id: timesheet.id,
           timesheet: {
-            date: Date.today + 2.days,
+            date: Date.today - 2.days,
           }
         }
       end
 
       it 'should update date of record!' do
-        expect { subject }.to change { timesheet.reload.date }.from(Date.today).to(Date.today + 2.days)
+        expect { subject }.to change { timesheet.reload.date }.from(Date.today).to(Date.today - 2.days)
       end
     end
 
@@ -159,8 +178,7 @@ RSpec.describe TimesheetsController, type: :controller do
       let(:params) do
         { id: timesheet.id,
           timesheet: {
-            date: '',
-            start_time: '',
+            date: ''
           }
         }
       end
@@ -175,7 +193,7 @@ RSpec.describe TimesheetsController, type: :controller do
       let(:params) do
         { id: 99999,
           timesheet: {
-            date: Date.today + 2.days,
+            date: Date.today - 2.days,
           }
         }
       end
