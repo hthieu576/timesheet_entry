@@ -9,11 +9,11 @@
   .row.mb-3
     .col-4
       = f.label :date
-      = f.date_field :date, class: 'datepicker form-control'
+      = f.date_field :date, class: 'form-control', max: Date.today
   .row.mb-3
     .col-4
       = f.label :start_time
-      = f.time_select :start_time, { class: 'datetimepicker3' }
+      = f.time_select :start_time
   .row.mb-3
     .col-4
       = f.label :finish_time
