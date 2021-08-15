@@ -12,8 +12,9 @@
 #
 FactoryBot.define do
   factory :timesheet do
-    date { "2021-08-14" }
-    start_time { "2021-08-14 09:29:31" }
-    finish_time { "2021-08-14 09:29:31" }
+    user
+    date { Date.today }
+    start_time { Time.parse('10:00') }
+    finish_time { Time.parse('18:00') }
   end
 end
