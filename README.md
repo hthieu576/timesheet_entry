@@ -1,24 +1,22 @@
-# README
+Tech Stack
+----------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* **Site:** Ruby on Rails, HAML
+* **UI:** jQuery, BootStrap
+* **Rails:** 6.1.4
+* **Ruby:** 2.6.6
+* **Database:** MySql 5.6.51
+* **Unit Tests:** rspec
+* **Authentication/Authorization:** Devise, Pundit
 
-Things you may want to cover:
+Standards
+---------
 
-* Ruby version
+**Coding Style**  
+For detailed coding style guidelines, please refer to https://rubystyle.guide/
 
-* System dependencies
+Project Links
+------------
 
-* Configuration
+**Github:** https://github.com/hthieu576/timesheet_entry
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
