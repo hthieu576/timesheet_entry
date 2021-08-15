@@ -15,8 +15,8 @@ module WorkingTimes
     }
 
     def earning_daily(date, start_time, finish_time)
-      start_time = Time.parse(start_time)
-      finish_time = Time.parse(finish_time)
+      start_time =  start_time.is_a?(String) ? Time.parse(start_time) : Time.parse(start_time.strftime('%H:%M'))
+      finish_time = finish_time.is_a?(String) ? Time.parse(finish_time) : Time.parse(finish_time.strftime('%H:%M'))
       schedule_working = WORKING_HOURS_SCHEDULE[date.wday]
       range_time_working = Time.parse(schedule_working[:start_time])..Time.parse(schedule_working[:finish_time])
       if range_time_working.include?(start_time..finish_time)
