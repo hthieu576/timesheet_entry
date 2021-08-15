@@ -21,21 +21,22 @@ module WorkingTimes
       schedule_working = WORKING_HOURS_SCHEDULE[date.wday]
       range_time_working = Time.parse(schedule_working[:start_time])..Time.parse(schedule_working[:finish_time])
 
-      if range_time_working.include?(start_time..finish_time)
+      case true
+      when range_time_working.include?(start_time..finish_time)
         total_hours(start_time, finish_time) * schedule_working[:rate]
-      elsif (start_time..finish_time).include?(range_time_working)
+      when (start_time..finish_time).include?(range_time_working)
         hours_inside_rate = (Time.parse(schedule_working[:finish_time]) - Time.parse(schedule_working[:start_time])) / 1.hours
         calculating_amount!(total_hours(start_time, finish_time), hours_inside_rate, schedule_working)
-      elsif finish_time < Time.parse(schedule_working[:start_time]) || start_time > Time.parse(schedule_working[:finish_time])
+      when finish_time < Time.parse(schedule_working[:start_time]) || start_time > Time.parse(schedule_working[:finish_time])
         total_hours(start_time, finish_time) * schedule_working[:outside_rate]
-      elsif range_time_working.exclude?(start_time) && range_time_working.include?(finish_time)
+      when range_time_working.exclude?(start_time) && range_time_working.include?(finish_time)
         hours_inside_rate = (finish_time - Time.parse(schedule_working[:start_time])) / 1.hours
         calculating_amount!(total_hours(start_time, finish_time), hours_inside_rate, schedule_working)
-      elsif range_time_working.include?(start_time) && range_time_working.exclude?(finish_time)
+      when range_time_working.include?(start_time) && range_time_working.exclude?(finish_time)
         hours_inside_rate = (Time.parse(schedule_working[:finish_time]) - start_time) / 1.hours
         calculating_amount!(total_hours(start_time, finish_time), hours_inside_rate, schedule_working)
       else
-        0                    
+        0
       end
     end
 
