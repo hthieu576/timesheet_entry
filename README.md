@@ -15,7 +15,7 @@ Standards
 **Coding Style**  
 For detailed coding style guidelines, please refer to https://rubystyle.guide/
 
-Project Links
+Project Link
 ------------
 
 **Github:** https://github.com/hthieu576/timesheet_entry
